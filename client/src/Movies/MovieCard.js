@@ -3,7 +3,7 @@ import React from "react";
 const MovieCard = props => {
   const { title, director, metascore, stars } = props.movie;
   return (
-    <div className="movie-card" onClick={props.routeTo}>
+    <React.Fragment>
       <h2>{title}</h2>
       <div className="movie-director">
         Director: <em>{director}</em>
@@ -18,7 +18,7 @@ const MovieCard = props => {
           {star}
         </div>
       ))}
-    </div>
+    </React.Fragment>
   );
 };
 
