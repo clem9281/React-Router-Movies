@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import MovieCard from "./MovieCard";
+
 export default class MovieList extends Component {
   constructor(props) {
     super(props);
@@ -21,14 +23,13 @@ export default class MovieList extends Component {
       });
   }
   routeToMovie = (props, movie) => {
-    console.log("clicked");
     props.history.push(`/movies/${movie.id}`);
   };
   render() {
     return (
       <div className="movie-list">
         {this.state.movies.map(movie => (
-          <MovieDetails
+          <MovieCard
             movie={movie}
             key={movie.id}
             routeTo={() => this.routeToMovie(this.props, movie)}
