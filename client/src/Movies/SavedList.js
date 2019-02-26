@@ -5,8 +5,11 @@ export default class SavedList extends Component {
   constructor(props) {
     super(props);
   }
-
+  goHome = () => {
+    this.props.history.push("/");
+  };
   render() {
+    console.log(this.props);
     return (
       <div className="saved-list">
         <h3>Saved Movies:</h3>
@@ -19,9 +22,9 @@ export default class SavedList extends Component {
             <span className="saved-movie">{movie.title}</span>
           </NavLink>
         ))}
-        <Link to="/">
-          <div className="home-button">Home</div>
-        </Link>
+        <div className="home-button" onClick={this.goHome}>
+          Home
+        </div>
       </div>
     );
   }

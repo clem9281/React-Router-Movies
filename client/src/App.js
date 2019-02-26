@@ -25,7 +25,11 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <SavedList list={this.state.savedList} />
+        {/* Made this a route to have access to props.history on the saved list component, with '/' as the path and not exact it should show up on all views */}
+        <Route
+          path="/"
+          render={props => <SavedList {...props} list={this.state.savedList} />}
+        />
         <Route path="/" exact component={MovieList} />
         <Route
           path="/movies/:id"
