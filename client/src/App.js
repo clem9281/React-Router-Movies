@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import SavedList from './Movies/SavedList';
-import MovieList from './Movies/MovieList';
-import Movie from './Movies/Movie';
+import SavedList from "./Movies/SavedList";
+import MovieList from "./Movies/MovieList";
+import Movie from "./Movies/Movie";
+
+import { Route } from "react-router-dom";
 
 export default class App extends Component {
   constructor() {
@@ -14,15 +16,27 @@ export default class App extends Component {
 
   addToSavedList = movie => {
     const savedList = this.state.savedList;
-    savedList.push(movie);
-    this.setState({ savedList });
+    if (!savedList.includes(movie)) {
+      savedList.push(movie);
+      this.setState({ savedList });
+    }
   };
 
   render() {
     return (
       <div>
-        <SavedList list={this.state.savedList} />
-        <div>Replace this Div with your Routes</div>
+        {/* Made this a route to have access to props.history on the saved list component, with '/' as the path and not exact it should show up on all views */}
+        <Route
+          path="/"
+          render={props => <SavedList {...props} list={this.state.savedList} />}
+        />
+        <Route path="/" exact component={MovieList} />
+        <Route
+          path="/movies/:id"
+          render={props => (
+            <Movie {...props} addToSavedList={this.addToSavedList} />
+          )}
+        />
       </div>
     );
   }
